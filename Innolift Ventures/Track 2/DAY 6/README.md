@@ -1,31 +1,23 @@
 # Day 6 - Algorithm Comparison
 
-## Objective
-Compare multiple machine learning algorithms for the Customer Churn Prediction project and identify the best-performing model.
+## Project
+Customer Churn Prediction System
 
-## Dataset
-E-commerce Customer Churn Dataset
+## Work Completed Today
 
-## Steps Performed
-1. Loaded the dataset into Google Colab.
-2. Identified the target column (churn).
-3. Separated features and target variables.
-4. Converted categorical data into numerical format using one-hot encoding.
-5. Split the dataset into training and testing sets.
-6. Trained the following models:
-   - Logistic Regression
-   - Decision Tree
-   - Random Forest
-   - Gradient Boosting
-7. Evaluated models using:
-   - Accuracy
-   - Precision
-   - Recall
-   - F1-Score
-8. Created a comparison table and exported it to CSV.
-9. Selected the best-performing model.
+- Loaded and analyzed the E-commerce Customer Churn dataset.
+- Performed data preprocessing and converted categorical features into numerical format.
+- Split the dataset into training and testing sets.
+- Trained and evaluated four machine learning algorithms:
+  - Logistic Regression
+  - Decision Tree
+  - Random Forest
+  - Gradient Boosting
+- Compared model performance using Accuracy, Precision, Recall, and F1-Score.
+- Generated a comparison table and exported the results to a CSV file.
+- Analyzed the results and selected the most suitable model for the project.
 
-## Results
+## Model Comparison Results
 
 | Model | Accuracy |
 |---------|---------|
@@ -34,11 +26,22 @@ E-commerce Customer Churn Dataset
 | Random Forest | 64.95% |
 | Gradient Boosting | 65.81% |
 
-## Best Model
-Gradient Boosting achieved the highest accuracy (65.81%) and was selected as the best-performing model.
+## Selected Model for Project
 
-## Files Included
-- day6_algorithm_comparison.ipynb
-- model_comparison.csv
-- Comparison table screenshot
-- Best model screenshot
+**Logistic Regression**
+
+## Why Logistic Regression Was Chosen
+
+Although Gradient Boosting achieved the highest accuracy (65.81%), the improvement over Logistic Regression (65.51%) was very small.
+
+Logistic Regression was selected because:
+
+- It provides performance comparable to Gradient Boosting.
+- It is simple to understand and explain.
+- It is easier to implement and maintain.
+- It trains faster and requires fewer computational resources.
+- It is suitable for a customer churn prediction project.
+
+## Conclusion
+
+Multiple machine learning algorithms were evaluated for customer churn prediction. While Gradient Boosting achieved the highest accuracy, Logistic Regression offered nearly the same performance with greater simplicity and interpretability. Therefore, Logistic Regression was selected as the final model for the project.
