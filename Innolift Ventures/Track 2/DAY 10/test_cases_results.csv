@@ -1,0 +1,11 @@
+Case,Prediction,Confidence,Status
+1,Churn,62.07%,PASS
+2,No Churn,74.91%,PASS
+3,No Churn,79.40%,PASS
+4,No Churn,69.87%,PASS
+5,No Churn,74.73%,PASS
+6,No Churn,55.54%,PASS
+7,No Churn,70.40%,PASS
+8,No Churn,58.90%,PASS
+9,No Churn,60.80%,PASS
+10,Churn,67.78%,PASS
