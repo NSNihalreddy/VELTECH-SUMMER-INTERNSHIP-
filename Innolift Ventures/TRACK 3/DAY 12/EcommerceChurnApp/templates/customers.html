@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Records</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/prediction">Prediction</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/about">About</a>
+    <a href="/customers">Customers</a>
+</nav>
+
+<div class="hero">
+
+    <h1>Customer Records</h1>
+
+    <table border="1" cellpadding="10">
+
+        <tr>
+            <th>ID</th>
+            <th>Tenure</th>
+            <th>Warehouse To Home</th>
+            <th>Devices Registered</th>
+            <th>Satisfaction Score</th>
+            <th>Order Count</th>
+            <th>Cashback Amount</th>
+        </tr>
+
+        {% for customer in customers %}
+        <tr>
+            <td>{{ customer['id'] }}</td>
+            <td>{{ customer['tenure'] }}</td>
+            <td>{{ customer['warehouse_to_home'] }}</td>
+            <td>{{ customer['devices_registered'] }}</td>
+            <td>{{ customer['satisfaction_score'] }}</td>
+            <td>{{ customer['order_count'] }}</td>
+            <td>{{ customer['cashback_amount'] }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

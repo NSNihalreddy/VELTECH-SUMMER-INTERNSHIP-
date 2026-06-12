@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Churn Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/prediction">Prediction</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/about">About</a>
+        <a href="/customers">Customers</a>
+    </nav>
+
+    <div class="hero">
+        <h1>Customer Churn Prediction</h1>
+
+        <p>
+            Enter customer information to store and analyze churn-related data.
+        </p>
+
+        <form method="POST" action="/add_customer" class="prediction-form">
+
+            <input type="number" name="tenure" placeholder="Tenure" required>
+
+            <input type="number" name="warehouse_to_home" placeholder="Warehouse To Home" required>
+
+            <input type="number" name="devices_registered" placeholder="Number Of Devices Registered" required>
+
+            <input type="number" name="satisfaction_score" placeholder="Satisfaction Score" required>
+
+            <input type="number" name="order_count" placeholder="Order Count" required>
+
+            <input type="number" name="cashback_amount" placeholder="Cashback Amount" required>
+
+            <button type="submit">Predict & Save</button>
+
+        </form>
+    </div>
+
+</body>
+</html>
