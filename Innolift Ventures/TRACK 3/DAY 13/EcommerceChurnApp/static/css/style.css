@@ -437,3 +437,14 @@ background:rgba(255,255,255,0.15);
     font-size:36px;
     margin:0;
 }
+/* Customers Table Responsive Fix */
+
+.table-container{
+    width:100%;
+    overflow-x:auto;
+    border-radius:15px;
+}
+
+.table-container table{
+    min-width:1000px;
+}
