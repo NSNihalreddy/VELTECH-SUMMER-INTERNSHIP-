@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-Commerce Customer Churn Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<body>
+
+    <nav>
+     <a href="/">Home</a>
+    <a href="/prediction">Prediction</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/customers">Customers</a>
+    <a href="/about">About</a>
+    </nav>
+<section class="hero">
+    <h1>E-Commerce Customer Churn Prediction System</h1>
+
+    <p>
+        Predict customer churn using Machine Learning and help businesses
+        improve customer retention strategies.
+    </p>
+
+    <a href="/prediction">
+        <button>Start Prediction</button>
+    </a>
+    <div class="stats-container">
+
+    <div class="stat-card">
+        <h3>Total Predictions</h3>
+        <h2>{{ total_customers }}</h2>
+    </div>
+
+    <div class="stat-card">
+        <h3>Churn Customers</h3>
+        <h2>{{ churned_customers }}</h2>
+    </div>
+
+    <div class="stat-card">
+        <h3>Retained Customers</h3>
+        <h2>{{ retained_customers }}</h2>
+    </div>
+
+    <div class="stat-card">
+        <h3>Model Accuracy</h3>
+        <h2>84%</h2>
+    </div>
+
+</div>
+</section>
+<footer>
+    <p>© 2026 E-Commerce Customer Churn Prediction System</p>
+</footer>
+</body>
+</html>

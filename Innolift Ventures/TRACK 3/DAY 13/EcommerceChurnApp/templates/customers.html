@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Records</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/prediction">Prediction</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/customers">Customers</a>
+    <a href="/about">About</a>
+</nav>
+
+<div class="hero">
+
+    <h1>Customer Records</h1>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Customer ID</th>
+            <th>Age</th>
+            <th>Tenure</th>
+            <th>Orders</th>
+            <th>City</th>
+            <th>Subscription</th>
+            <th>Prediction</th>
+            <th>Confidence</th>
+            <th>Action</th>
+        </tr>
+
+        {% for customer in customers %}
+        <tr>
+
+            <td>{{ loop.index }}</td>
+            <td>{{ customer['customer_id'] }}</td>
+            <td>{{ customer['age'] }}</td>
+            <td>{{ customer['tenure_months'] }}</td>
+            <td>{{ customer['total_orders'] }}</td>
+            <td>{{ customer['city'] }}</td>
+            <td>{{ customer['subscription_type'] }}</td>
+            <td>{{ customer['prediction'] }}</td>
+            <td>{{ customer['confidence'] }}%</td>
+
+            <td>
+                <a href="/delete_customer/{{ customer['id'] }}"
+                   class="delete-btn">
+                   Delete
+                </a>
+            </td>
+
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</div>
+
+<footer>
+    © 2026 Customer Churn Prediction System | Flask • SQLite • Machine Learning
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Churn Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/prediction">Prediction</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/customers">Customers</a>
+    <a href="/about">About</a>
+</nav>
+
+<div class="hero">
+
+    <div class="form-container">
+
+        <h1>Customer Churn Prediction</h1>
+
+        <p>
+            Enter customer details and predict churn probability.
+        </p>
+
+        <form method="POST" action="/predict" class="prediction-form">
+
+            <input type="number"
+                   name="customer_id"
+                   placeholder="Customer ID"
+                   required>
+
+            <input type="number"
+                   name="age"
+                   placeholder="Age"
+                   required>
+
+            <input type="number"
+                   name="tenure_months"
+                   placeholder="Tenure Months"
+                   required>
+
+            <input type="number"
+                   step="0.01"
+                   name="avg_order_value"
+                   placeholder="Average Order Value"
+                   required>
+
+            <input type="number"
+                   name="total_orders"
+                   placeholder="Total Orders"
+                   required>
+
+            <input type="number"
+                   name="last_purchase_days_ago"
+                   placeholder="Last Purchase Days Ago"
+                   required>
+
+            <input type="number"
+                   name="support_tickets"
+                   placeholder="Support Tickets"
+                   required>
+
+            <select name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <select name="city" required>
+                <option value="">Select City</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Pune">Pune</option>
+            </select>
+
+            <select name="subscription_type" required>
+                <option value="">Subscription Type</option>
+                <option value="Gold">Gold</option>
+                <option value="Platinum">Platinum</option>
+                <option value="Silver">Silver</option>
+            </select>
+
+            <button type="submit">
+                Predict Churn
+            </button>
+
+        </form>
+
+        {% if prediction %}
+
+        <div class="result-box">
+
+            <h2>Prediction Result</h2>
+
+            <h3>{{ prediction }}</h3>
+
+            <p>
+                Confidence Score:
+                <strong>{{ confidence }}%</strong>
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Customer Churn Prediction System | Flask • SQLite • Machine Learning
+</footer>
+
+</body>
+</html>
