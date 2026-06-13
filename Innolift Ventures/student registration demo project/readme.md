@@ -1,16 +1,16 @@
-# 🎓 Student Registration Portal
+#  Student Registration Portal
 
 A web-based Student Registration Portal developed using Flask and SQLite for managing student information efficiently. The system allows users to register students, store data in a database, view records, organize students by department, and manage student information through a modern user interface.
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 The Student Registration Portal provides a centralized platform for maintaining student records. It enables users to add, view, and manage student information while categorizing records according to academic departments.
 
 ---
 
-## 🚀 Features
+## Features
 
 - Student Registration Form
 - SQLite Database Integration
@@ -24,7 +24,7 @@ The Student Registration Portal provides a centralized platform for maintaining 
 
 ---
 
-## 🛠 Technologies Used
+## Technologies Used
 
 - Python
 - Flask
@@ -35,7 +35,7 @@ The Student Registration Portal provides a centralized platform for maintaining 
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 Student Registration Portal
@@ -61,7 +61,7 @@ Student Registration Portal
 
 ---
 
-## ⚙️ Installation
+## Installation
 
 ### Clone Repository
 
@@ -95,7 +95,7 @@ http://127.0.0.1:5000
 
 ---
 
-## 📊 Modules
+## Modules
 
 ### Home Page
 Provides quick access to student registration, records, and department information.
@@ -125,7 +125,7 @@ Displays project details, objectives, and technologies used.
 
 ---
 
-## 🎯 Learning Outcomes
+## Learning Outcomes
 
 This project helped in understanding and implementing:
 
@@ -139,7 +139,7 @@ This project helped in understanding and implementing:
 
 ---
 
-## 💻 User Interface Highlights
+## User Interface Highlights
 
 - Modern Glassmorphism Design
 - Gradient Background Effects
@@ -150,7 +150,7 @@ This project helped in understanding and implementing:
 
 ---
 
-## 👨‍💻 Developed By
+## Developed By
 
 **Nareddy Shanmukha Nihalreddy**
 
@@ -158,6 +158,6 @@ Developed as part of the **Innolift Ventures Internship Program**.
 
 ---
 
-## 📄 License
+## License
 
 This project is intended for educational and learning purposes.
