@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Portal</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav>
+
+    <div class="logo">
+        Student Portal
+    </div>
+
+    <div class="menu">
+        <a href="/">Home</a>
+        <a href="/register">Register</a>
+        <a href="/students">Students</a>
+        <a href="/about">About</a>
+    </div>
+
+</nav>
+
+<div class="page-content">
+
+    <section class="hero">
+
+        <div class="hero-left">
+
+            <h1>Student Registration Portal</h1>
+
+            <p>
+                A modern platform to register, manage and organize
+                student information efficiently across departments.
+            </p>
+
+            <div class="buttons">
+
+                <a href="/register" class="btn">
+                    Register Student
+                </a>
+
+                <a href="/students" class="btn secondary">
+                    View Students
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png"
+                 alt="Student">
+
+        </div>
+
+    </section>
+
+    <section class="cards">
+
+        <a href="/student_records" class="card">
+
+            <h2>Student Records</h2>
+
+            <p>
+                View department-wise student records stored in
+                the database. Easily access and organize student
+                information based on academic departments.
+            </p>
+
+        </a>
+
+        <a href="/departments" class="card">
+
+            <h2>Departments</h2>
+
+            <p>
+                Explore the departments available in the institution
+                and understand how students are categorized across
+                different academic programs.
+            </p>
+
+        </a>
+
+    </section>
+
+</div>
+
+<footer>
+    © 2026 Student Registration Portal
+</footer>
+
+</body>
+</html>

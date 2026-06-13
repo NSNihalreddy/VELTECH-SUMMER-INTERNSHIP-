@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Records</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav>
+    <div class="logo">Student Portal</div>
+
+    <div class="menu">
+        <a href="/">Home</a>
+        <a href="/register">Register</a>
+        <a href="/students">Students</a>
+        <a href="/about">About</a>
+    </div>
+</nav>
+
+<div class="records-container">
+
+    <div class="records-header">
+        <h1>Department Wise Student Records</h1>
+        <p>View and manage registered students department-wise.</p>
+    </div>
+
+    {% if cse %}
+    <div class="department-section">
+        <h2>CSE Department</h2>
+
+        <table class="records-table">
+            <tr>
+                <th>Name</th>
+                <th>Roll No</th>
+                <th>Email</th>
+            </tr>
+
+            {% for student in cse %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.rollno }}</td>
+                <td>{{ student.email }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+
+    {% if ece %}
+    <div class="department-section">
+        <h2>ECE Department</h2>
+
+        <table class="records-table">
+            <tr>
+                <th>Name</th>
+                <th>Roll No</th>
+                <th>Email</th>
+            </tr>
+
+            {% for student in ece %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.rollno }}</td>
+                <td>{{ student.email }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+
+    {% if eee %}
+    <div class="department-section">
+        <h2>EEE Department</h2>
+
+        <table class="records-table">
+            <tr>
+                <th>Name</th>
+                <th>Roll No</th>
+                <th>Email</th>
+            </tr>
+
+            {% for student in eee %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.rollno }}</td>
+                <td>{{ student.email }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+
+    {% if mechanical %}
+    <div class="department-section">
+        <h2>Mechanical Department</h2>
+
+        <table class="records-table">
+            <tr>
+                <th>Name</th>
+                <th>Roll No</th>
+                <th>Email</th>
+            </tr>
+
+            {% for student in mechanical %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.rollno }}</td>
+                <td>{{ student.email }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+
+    {% if civil %}
+    <div class="department-section">
+        <h2>Civil Department</h2>
+
+        <table class="records-table">
+            <tr>
+                <th>Name</th>
+                <th>Roll No</th>
+                <th>Email</th>
+            </tr>
+
+            {% for student in civil %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.rollno }}</td>
+                <td>{{ student.email }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+
+</div>
+
+<footer>
+    © 2026 Student Registration Portal
+</footer>
+
+</body>
+</html>

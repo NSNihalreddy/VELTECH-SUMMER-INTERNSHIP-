@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Student</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav>
+
+    <div class="logo">
+        Student Portal
+    </div>
+
+    <div class="menu">
+        <a href="/">Home</a>
+        <a href="/register">Register</a>
+        <a href="/students">Students</a>
+        <a href="/about">About</a>
+    </div>
+
+</nav>
+
+<div class="page-content">
+
+    <div class="form-container">
+
+        <h1>Student Registration Form</h1>
+
+        <form action="/add_student" method="POST">
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Student Name"
+                required>
+
+            <input
+                type="text"
+                name="rollno"
+                placeholder="Roll Number"
+                required>
+
+            <select name="department" required>
+                <option value="">Select Department</option>
+                <option value="CSE">CSE</option>
+                <option value="ECE">ECE</option>
+                <option value="EEE">EEE</option>
+                <option value="Mechanical">Mechanical</option>
+                <option value="Civil">Civil</option>
+            </select>
+
+            <select name="year" required>
+                <option value="">Select Year</option>
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+                <option>4th Year</option>
+            </select>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                required>
+
+            <input
+                type="text"
+                name="phone"
+                placeholder="Phone Number"
+                required>
+
+            <select name="gender" required>
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+
+            <textarea
+                name="address"
+                rows="4"
+                placeholder="Address"
+                required></textarea>
+
+            <button type="submit">
+                Register Student
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Student Registration Portal
+</footer>
+
+</body>
+</html>

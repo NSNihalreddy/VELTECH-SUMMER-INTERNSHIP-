@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Students</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+          filename='css/style.css') }}">
+</head>
+<body>
+
+<nav>
+    <div class="logo">Student Portal</div>
+
+
+<div class="menu">
+    <a href="/">Home</a>
+    <a href="/register">Register</a>
+    <a href="/students">Students</a>
+    <a href="/about">About</a>
+</div>
+
+</nav>
+
+<div class="stats-card">
+
+
+<h2>{{ students|length }}</h2>
+
+<p>Total Registered Students</p>
+
+</div>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>S.No</th>
+<th>Name</th>
+<th>Roll No</th>
+<th>Department</th>
+<th>Year</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Action</th>
+
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for student in students %}
+
+<tr>
+
+
+<td>{{ loop.index }}</td>
+
+<td>{{ student.name }}</td>
+
+<td>{{ student.rollno }}</td>
+
+<td>{{ student.department }}</td>
+
+<td>{{ student.year }}</td>
+
+<td>{{ student.email }}</td>
+
+<td>{{ student.phone }}</td>
+
+<td>
+
+    <a href="/delete_student/{{ student.id }}"
+       class="delete-btn"
+       onclick="return confirm('Delete this student?')">
+
+       Delete
+
+    </a>
+
+</td>
+
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+<footer>
+    © 2026 Student Registration Portal
+</footer>
+
+</body>
+</html>
