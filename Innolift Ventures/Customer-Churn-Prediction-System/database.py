@@ -35,3 +35,20 @@ conn.commit()
 conn.close()
 
 print("Database Created Successfully")
+import sqlite3
+
+conn = sqlite3.connect("churn.db")
+
+conn.execute("""
+CREATE TABLE IF NOT EXISTS users(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE,
+    email TEXT UNIQUE,
+    password TEXT
+)
+""")
+
+conn.commit()
+conn.close()
+
+print("Users table created successfully")
