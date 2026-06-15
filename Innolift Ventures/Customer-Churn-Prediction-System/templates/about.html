@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>About Project</title>
+
+```
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+```
+
+</head>
+
+<body>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/prediction">Prediction</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/customers">Customers</a>
+    <a href="/about">About</a>
+</nav>
+
+<div class="hero">
+
+```
+<h1>About Customer Churn Prediction System</h1>
+
+<p style="text-align:justify; line-height:1.8; color:#dbeafe; margin-bottom:30px;">
+    The Customer Churn Prediction System is a Machine Learning-based web application
+    developed during the Innolift Ventures Internship Program. The project predicts
+    whether a customer is likely to leave the company's services (Churn) or continue
+    using them (No Churn). The system combines a trained Logistic Regression model,
+    Flask backend, SQLite database, and a responsive user interface to provide
+    real-time predictions, customer record management, and business insights through
+    an interactive dashboard.
+</p>
+
+<table>
+
+    <tr>
+        <th>Prediction Field</th>
+        <th>Description</th>
+    </tr>
+
+    <tr>
+        <td>Customer ID</td>
+        <td>Unique identifier assigned to each customer.</td>
+    </tr>
+
+    <tr>
+        <td>Age</td>
+        <td>Age of the customer in years.</td>
+    </tr>
+
+    <tr>
+        <td>Tenure Months</td>
+        <td>Duration the customer has been associated with the company.</td>
+    </tr>
+
+    <tr>
+        <td>Average Order Value</td>
+        <td>Average amount spent by the customer per order.</td>
+    </tr>
+
+    <tr>
+        <td>Total Orders</td>
+        <td>Total number of orders placed by the customer.</td>
+    </tr>
+
+    <tr>
+        <td>Last Purchase Days Ago</td>
+        <td>Number of days since the customer's most recent purchase.</td>
+    </tr>
+
+    <tr>
+        <td>Support Tickets</td>
+        <td>Total support requests or complaints raised by the customer.</td>
+    </tr>
+
+    <tr>
+        <td>Gender</td>
+        <td>Customer demographic information used during prediction.</td>
+    </tr>
+
+    <tr>
+        <td>City</td>
+        <td>Customer location information.</td>
+    </tr>
+
+    <tr>
+        <td>Subscription Type</td>
+        <td>Membership plan selected by the customer (Gold, Platinum, or Silver).</td>
+    </tr>
+
+    <tr>
+        <td>Prediction Result</td>
+        <td>Indicates whether the customer is likely to Churn or remain active.</td>
+    </tr>
+
+    <tr>
+        <td>Confidence Score</td>
+        <td>Shows the confidence level of the Machine Learning model prediction.</td>
+    </tr>
+
+</table>
+```
+
+</div>
+
+<footer>
+    © 2026 Customer Churn Prediction System | Flask • SQLite • Machine Learning
+</footer>
+
+</body>
+</html>

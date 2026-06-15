@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/prediction">Prediction</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/customers">Customers</a>
+    <a href="/about">About</a>
+</nav>
+
+<div class="hero">
+
+    <h1>Customer Churn Dashboard</h1>
+
+    <div class="dashboard-cards">
+
+        <div class="stat-card">
+            <p>Total Customers</p>
+            <h2>{{ total_customers }}</h2>
+        </div>
+
+        <div class="stat-card churn">
+            <p>Churned Customers</p>
+            <h2>{{ churned_customers }}</h2>
+        </div>
+
+        <div class="stat-card retained">
+            <p>Retained Customers</p>
+            <h2>{{ retained_customers }}</h2>
+        </div>
+
+        <div class="stat-card rate">
+            <p>Churn Rate</p>
+            <h2>{{ churn_rate }}%</h2>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Customer Churn Prediction System | Flask • SQLite • Machine Learning
+</footer>
+
+</body>
+</html>
