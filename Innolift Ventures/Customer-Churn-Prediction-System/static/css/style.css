@@ -377,29 +377,34 @@ footer{
 /* About Page */
 
 .hero table{
-margin-top:25px;
-width:100%;
-border-collapse:collapse;
-overflow:hidden;
-border-radius:15px;
+    width:100%;
+    border-collapse:collapse;
+    border-radius:15px;
+    overflow:hidden;
+    table-layout:fixed;
+}
+
+.hero table th,
+.hero table td{
+    text-align:center;
+    vertical-align:middle;
+    padding:18px;
 }
 
 .hero table th{
-background:#1e40af;
-color:white;
-padding:15px;
-text-align:left;
+    background:#1e40af;
+    color:white;
+    font-weight:600;
 }
 
 .hero table td{
-padding:15px;
-color:white;
-background:rgba(255,255,255,0.08);
-border-bottom:1px solid rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.08);
+    color:white;
 }
 
 .hero table tr:hover td{
-background:rgba(255,255,255,0.15);
+    background:rgba(255,255,255,0.15);
+}und:rgba(255,255,255,0.15);
 }
 .stats-container{
     margin-top:40px;
