@@ -1,9 +1,9 @@
 import sqlite3
 import joblib
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session, url_for,flash
 import pandas as pd
 from flask import session
-
+import database
 # Load ML Model
 model = joblib.load("final_model.pkl")
 
@@ -58,11 +58,12 @@ def register():
 
         conn.execute(
             """
-            INSERT INTO users(email, password)
-            VALUES (?, ?)
+            INSERT INTO users(username, email, password)
+            VALUES (?, ?, ?)
             """,
-            (email, password)
-        )
+            (username, email, password)
+            )
+        
 
         conn.commit()
         conn.close()
@@ -100,7 +101,8 @@ def forgot_password():
             conn.commit()
             conn.close()
 
-            return "Password Updated Successfully. Go back and Login."
+            flash("Password Updated Successfully. Please Login.")
+            return redirect("/login")
 
         conn.close()
         return "Email Not Found"
