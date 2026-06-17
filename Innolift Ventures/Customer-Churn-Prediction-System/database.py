@@ -2,12 +2,10 @@ import sqlite3
 
 conn = sqlite3.connect("churn.db")
 
-conn.execute("""
-DROP TABLE IF EXISTS customers
-""")
+
 
 conn.execute("""
-CREATE TABLE customers(
+CREATE TABLE IF NOT EXISTS customers(
 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
 
