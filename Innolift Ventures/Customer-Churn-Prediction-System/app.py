@@ -102,7 +102,7 @@ def forgot_password():
             conn.close()
 
             flash("Password Updated Successfully. Please Login.")
-            return redirect("/login")
+            return redirect(url_for("login"))
 
         conn.close()
         return "Email Not Found"
