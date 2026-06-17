@@ -1019,3 +1019,12 @@ footer{
 .forgot-card a:hover{
     color:#93c5fd;
 }
+.success-message{
+    background:#dcfce7;
+    color:#166534;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
+    font-weight:600;
+    text-align:center;
+}
