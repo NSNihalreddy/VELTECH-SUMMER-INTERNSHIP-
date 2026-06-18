@@ -16,7 +16,11 @@ app = Flask(__name__)
 app.secret_key = "customer_churn_secret"
 # Database Connection
 def get_db_connection():
-    conn = sqlite3.connect("churn.db")
+    conn = sqlite3.connect(
+        "churn.db",
+        timeout=30,
+        check_same_thread=False
+    )
     conn.row_factory = sqlite3.Row
     return conn
 @app.route("/", methods=["GET", "POST"])
