@@ -73,7 +73,7 @@ def register():
             conn.close()
 
             flash("Account Created Successfully. Please Login.")
-            return redirect("/")
+            return redirect("/login")
 
         except sqlite3.IntegrityError:
             conn.close()
