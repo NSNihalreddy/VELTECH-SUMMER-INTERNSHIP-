@@ -15,6 +15,15 @@
 
         <h1>Join the Platform</h1>
         <h2>Create Your Account</h2>
+        {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="success-message">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 
         <form method="POST">
 
