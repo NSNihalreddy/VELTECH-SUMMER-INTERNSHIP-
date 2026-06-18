@@ -60,19 +60,26 @@ def register():
 
         conn = get_db_connection()
 
-        conn.execute(
-            """
-            INSERT INTO users(username, email, password)
-            VALUES (?, ?, ?)
-            """,
-            (username, email, password)
+        try:
+            conn.execute(
+                """
+                INSERT INTO users(username, email, password)
+                VALUES (?, ?, ?)
+                """,
+                (username, email, password)
             )
-        
 
-        conn.commit()
-        conn.close()
+            conn.commit()
+            conn.close()
 
-        return redirect("/")
+            flash("Account Created Successfully. Please Login.")
+            return redirect("/")
+
+        except sqlite3.IntegrityError:
+            conn.close()
+
+            flash("Email already registered. Login with existing account.")
+            return redirect("/register")
 
     return render_template("register.html")
 @app.route("/logout")
