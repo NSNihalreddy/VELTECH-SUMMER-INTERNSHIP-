@@ -68,7 +68,8 @@ def register():
                 """,
                 (username, email, password)
             )
-
+        
+            # insert user
             conn.commit()
             conn.close()
 
@@ -80,8 +81,7 @@ def register():
 
             flash("Email already registered. Login with existing account.")
             return redirect("/register")
-
-    return render_template("register.html")
+            return render_template("register.html")
 @app.route("/logout")
 def logout():
     session.clear()
