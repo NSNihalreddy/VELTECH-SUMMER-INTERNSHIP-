@@ -116,7 +116,8 @@ def forgot_password():
             return redirect(url_for("login"))
 
         conn.close()
-        return "Email Not Found"
+        flash("Email not found. Please enter a registered email.")
+        return redirect("/forgot_password")
 
     return render_template('forgot_password.html')
     
