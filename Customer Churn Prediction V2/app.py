@@ -28,8 +28,14 @@ SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 
 
 def get_gmail_service():
+
+    token_path = "/etc/secrets/token.json"
+
+    if not os.path.exists(token_path):
+        token_path = "token.json"
+
     creds = Credentials.from_authorized_user_file(
-        "token.json",
+        token_path,
         SCOPES
     )
 
