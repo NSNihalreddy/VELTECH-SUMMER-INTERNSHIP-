@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <h1>E-Commerce Customer Churn</h1>
+        <h2>Prediction System</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+
+            <div class="flash-message {{ category }}">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+        <form method="POST" id="loginForm" novalidate>
+
+    <input
+        type="email"
+        id="login_id"
+        name="login_id"
+        placeholder="Email Address"
+        autocomplete="email">
+
+    <small id="login_id_error" class="error"></small>
+
+    <div class="password-box">
+
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            autocomplete="current-password">
+
+        <span
+            id="togglePassword"
+            class="toggle-password">
+            👁
+        </span>
+
+    </div>
+
+    <small id="password_error" class="error"></small>
+
+    <button
+        type="submit"
+        id="loginBtn">
+        Login
+    </button>
+
+</form>
+
+        <a href="/forgot_password">Forgot Password?</a>
+
+        <p>
+            Don't have an account?
+            <a href="/register">Register</a>
+        </p>
+
+    </div>
+
+</div>
+<script>
+
+// ==============================
+// Show / Hide Password
+// ==============================
+
+const togglePassword = document.getElementById("togglePassword");
+const password = document.getElementById("password");
+
+togglePassword.addEventListener("click", function(){
+
+    if(password.type === "password"){
+
+        password.type = "text";
+        this.textContent = "🙈";
+
+    }
+    else{
+
+        password.type = "password";
+        this.textContent = "👁";
+
+    }
+
+});
+
+// ==============================
+// Helper Functions
+// ==============================
+
+function showError(id,message){
+
+    document.getElementById(id).classList.add("invalid");
+    document.getElementById(id+"_error").textContent = message;
+
+}
+
+function clearError(id){
+
+    document.getElementById(id).classList.remove("invalid");
+    document.getElementById(id+"_error").textContent = "";
+
+}
+
+// ==============================
+// Email Validation
+// ==============================
+
+function validateEmail(){
+
+    const email=document.getElementById("login_id").value.trim();
+
+    const pattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(email===""){
+
+        showError("login_id","Email Address is required.");
+        return false;
+
+    }
+
+    if(!pattern.test(email)){
+
+        showError("login_id","Enter a valid Email Address.");
+        return false;
+
+    }
+
+    clearError("login_id");
+    return true;
+
+}
+
+// ==============================
+// Password Validation
+// ==============================
+
+function validatePassword(){
+
+    const pass=document.getElementById("password").value;
+
+    if(pass===""){
+
+        showError("password","Password is required.");
+        return false;
+
+    }
+
+    if(pass.length<6){
+
+        showError("password","Password must contain at least 6 characters.");
+        return false;
+
+    }
+
+    clearError("password");
+    return true;
+
+}
+
+// ==============================
+// Live Validation
+// ==============================
+
+document.getElementById("login_id")
+.addEventListener("input",validateEmail);
+
+document.getElementById("password")
+.addEventListener("input",validatePassword);
+
+// ==============================
+// Form Validation
+// ==============================
+
+document.getElementById("loginForm")
+.addEventListener("submit",function(e){
+
+    let valid=true;
+
+    if(!validateEmail()) valid=false;
+
+    if(!validatePassword()) valid=false;
+
+    if(!valid){
+
+        e.preventDefault();
+        return;
+
+    }
+
+    const btn=document.getElementById("loginBtn");
+
+    btn.disabled=true;
+
+    btn.classList.add("loading");
+
+    btn.innerHTML="Logging in...";
+
+});
+
+</script>
+</body>
+</html>

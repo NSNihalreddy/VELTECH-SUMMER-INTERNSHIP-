@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Customer Churn Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        /* -----------------------------
+           Validation Styles
+        ------------------------------*/
+
+        .error{
+            display:block;
+            color:#dc3545;
+            font-size:13px;
+            font-weight:500;
+            margin-top:-8px;
+            margin-bottom:12px;
+            min-height:18px;
+        }
+
+        .prediction-form input.invalid,
+        .prediction-form select.invalid{
+            border:2px solid #dc3545;
+            box-shadow:0 0 5px rgba(220,53,69,0.25);
+        }
+
+        .prediction-form input:focus,
+        .prediction-form select:focus{
+            outline:none;
+        }
+
+    </style>
+
+</head>
+
+<body class="prediction-page">
+
+<!-- ==========================
+        Navigation Bar
+=========================== -->
+
+<nav>
+
+    <a href="/home">Home</a>
+    <a href="/prediction">Prediction</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/customers">Customers</a>
+    <a href="/about">About</a>
+
+    <a href="/logout" class="logout-btn">
+        Logout
+    </a>
+
+</nav>
+
+<!-- ==========================
+        Prediction Form
+=========================== -->
+
+<div class="hero">
+
+    <div class="page-header">
+
+        <h1>Customer Churn Prediction</h1>
+
+        <p>
+            Enter customer details below to predict
+            customer churn probability.
+        </p>
+
+    </div>
+
+    <div class="form-container">
+
+        <form
+            method="POST"
+            action="/predict"
+            class="prediction-form"
+            onsubmit="return validateForm()">
+
+            <!-- ======================
+                    Customer ID
+            ======================= -->
+
+            <input
+                type="text"
+                id="customer_id"
+                name="customer_id"
+                placeholder="Customer ID"
+                maxlength="5"
+                inputmode="numeric"
+                autocomplete="off"
+                required>
+
+            <small
+                id="customer_id_error"
+                class="error">
+            </small>
+
+            <!-- ======================
+                    Age
+            ======================= -->
+
+            <input
+                type="number"
+                id="age"
+                name="age"
+                placeholder="Age"
+                min="1"
+                max="100"
+                required>
+
+            <small
+                id="age_error"
+                class="error">
+            </small>
+
+            <!-- ======================
+                    Tenure Months
+            ======================= -->
+
+            <input
+                type="number"
+                id="tenure_months"
+                name="tenure_months"
+                placeholder="Tenure Months"
+                min="0"
+                max="400"
+                required>
+
+            <small
+                id="tenure_error"
+                class="error">
+            </small>
+            <!-- ======================
+                 Average Order Value
+            ======================= -->
+
+            <input
+                type="number"
+                id="avg_order_value"
+                name="avg_order_value"
+                placeholder="Average Order Value"
+                min="0"
+                max="9999999"
+                step="0.01"
+                required>
+
+            <small
+                id="avg_error"
+                class="error">
+            </small>
+
+            <!-- ======================
+                 Total Orders
+            ======================= -->
+
+            <input
+                type="number"
+                id="total_orders"
+                name="total_orders"
+                placeholder="Total Orders"
+                min="0"
+                max="10000"
+                required>
+
+            <small
+                id="orders_error"
+                class="error">
+            </small>
+
+            <!-- ======================
+                 Last Purchase Days
+            ======================= -->
+
+            <input
+                type="number"
+                id="last_purchase_days_ago"
+                name="last_purchase_days_ago"
+                placeholder="Last Purchase Days Ago"
+                min="0"
+                max="5000"
+                required>
+
+            <small
+                id="last_error"
+                class="error">
+            </small>
+
+            <!-- ======================
+                 Support Tickets
+            ======================= -->
+
+            <input
+            type="number"
+            id="support_tickets"
+            name="support_tickets"
+            placeholder="Support Tickets"
+            min="0"
+            required>
+
+        <small id="support_tickets_error" class="error"></small>
+
+            <!-- ======================
+                 Gender
+            ======================= -->
+
+            <select
+                id="gender"
+                name="gender"
+                required>
+
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+
+            </select>
+
+            <small
+                id="gender_error"
+                class="error">
+            </small>
+
+            <!-- ======================
+                 City
+            ======================= -->
+
+            <select
+                id="city"
+                name="city"
+                required>
+
+                <option value="">Select City</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Pune">Pune</option>
+
+            </select>
+
+            <small
+                id="city_error"
+                class="error">
+            </small>
+
+            <!-- ======================
+                 Subscription Type
+            ======================= -->
+
+            <select
+                id="subscription_type"
+                name="subscription_type"
+                required>
+
+                <option value="">Subscription Type</option>
+                <option value="Gold">Gold</option>
+                <option value="Platinum">Platinum</option>
+                <option value="Silver">Silver</option>
+
+            </select>
+
+            <small
+                id="subscription_error"
+                class="error">
+            </small>
+
+            <button type="submit">
+                Predict Churn
+            </button>
+
+        </form>
+
+        {% if prediction %}
+
+        <div class="result-box">
+
+            <h2>Prediction Result</h2>
+
+            <h3>{{ prediction }}</h3>
+
+            <p>
+                Confidence Score:
+                <strong>{{ confidence }}%</strong>
+            </p>
+
+            <hr>
+
+            <h3>Risk Factors</h3>
+
+            <ul>
+                {% for factor in risk_factors %}
+                    <li>{{ factor }}</li>
+                {% endfor %}
+            </ul>
+
+            <h3>Recommended Actions</h3>
+
+            <ul>
+                {% for action in recommended_actions %}
+                    <li>{{ action }}</li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Customer Churn Prediction System | Flask • SQLite • Machine Learning
+</footer>
+
+<script>
+/* ===========================================
+        Validation Helper Functions
+=========================================== */
+
+function showError(id, message){
+
+    const error = document.getElementById(id + "_error");
+    const field = document.getElementById(id);
+
+    error.textContent = message;
+
+    field.classList.add("invalid");
+
+}
+
+function clearError(id){
+
+    const error = document.getElementById(id + "_error");
+    const field = document.getElementById(id);
+
+    error.textContent = "";
+
+    field.classList.remove("invalid");
+
+}
+
+/* ===========================================
+        Individual Field Validation
+=========================================== */
+
+function validateCustomerID(){
+
+    const value = document.getElementById("customer_id").value.trim();
+
+    if(value === ""){
+        showError("customer_id","Customer ID is required.");
+        return false;
+    }
+
+    if(!/^[0-9]+$/.test(value)){
+        showError("customer_id","Customer ID must contain only numbers.");
+        return false;
+    }
+
+    if(value.length > 5){
+        showError("customer_id","Invalid Customer ID.");
+        return false;
+    }
+
+    clearError("customer_id");
+    return true;
+
+}
+
+function validateAge(){
+
+    const value = Number(document.getElementById("age").value);
+
+    if(isNaN(value)){
+        showError("age","Age is required.");
+        return false;
+    }
+
+    if(value < 1 || value > 100){
+        showError("age","Maximum allowed age is 100.");
+        return false;
+    }
+
+    clearError("age");
+    return true;
+
+}
+
+function validateTenure(){
+
+    const value = Number(document.getElementById("tenure_months").value);
+
+    if(isNaN(value)){
+        showError("tenure","Tenure Months is required.");
+        return false;
+    }
+
+    if(value < 0 || value > 400){
+        showError("tenure","Maximum allowed tenure is 400 months.");
+        return false;
+    }
+
+    clearError("tenure");
+    return true;
+
+}
+
+function validateOrderValue(){
+
+    const value = Number(document.getElementById("avg_order_value").value);
+
+    if(isNaN(value)){
+        showError("avg","Average Order Value is required.");
+        return false;
+    }
+
+    if(value > 9999999){
+        showError("avg","Invalid Order Value.");
+        return false;
+    }
+
+    clearError("avg");
+    return true;
+
+}
+
+function validateTotalOrders(){
+
+    const value = Number(document.getElementById("total_orders").value);
+
+    if(isNaN(value)){
+        showError("orders","Total Orders is required.");
+        return false;
+    }
+
+    if(value > 10000){
+        showError("orders","Invalid Total Orders.");
+        return false;
+    }
+
+    clearError("orders");
+    return true;
+
+}
+function validateLastPurchase(){
+
+    const value = Number(document.getElementById("last_purchase_days_ago").value);
+
+    if(isNaN(value)){
+        showError("last","Last Purchase Days is required.");
+        return false;
+    }
+
+    if(value < 0){
+        showError("last","Invalid Last Purchase Duration.");
+        return false;
+    }
+
+    if(value > 5000){
+        showError("last","Invalid Last Purchase Duration.");
+        return false;
+    }
+
+    clearError("last");
+    return true;
+
+}
+
+function validateSupportTickets(){
+
+    const field = document.getElementById("support_tickets");
+    const value = field.value.trim();
+
+    // Empty
+    if(value === ""){
+        showError("support_tickets","Support Tickets are required.");
+        return false;
+    }
+
+    // Not a valid number
+    if(isNaN(value)){
+        showError("support_tickets","Invalid Number of Support Tickets.");
+        return false;
+    }
+
+    // Less than 0
+    if(Number(value) < 0){
+        showError("support_tickets","Invalid Number of Support Tickets.");
+        return false;
+    }
+
+    // Greater than 50
+    if(Number(value) > 50){
+        showError("support_tickets","Invalid Number of Support Tickets.");
+        return false;
+    }
+
+    clearError("support_tickets");
+    return true;
+
+}
+
+function validateGender(){
+
+    const value = document.getElementById("gender").value;
+
+    if(value === ""){
+        showError("gender","Select Gender.");
+        return false;
+    }
+
+    clearError("gender");
+    return true;
+
+}
+
+function validateCity(){
+
+    const value = document.getElementById("city").value;
+
+    if(value === ""){
+        showError("city","Select City.");
+        return false;
+    }
+
+    clearError("city");
+    return true;
+
+}
+
+function validateSubscription(){
+
+    const value = document.getElementById("subscription_type").value;
+
+    if(value === ""){
+        showError("subscription","Select Subscription Type.");
+        return false;
+    }
+
+    clearError("subscription");
+    return true;
+
+}
+
+/* ===========================================
+        Form Validation
+=========================================== */
+
+function validateForm(){
+
+    let valid = true;
+
+    if(!validateCustomerID()) valid = false;
+    if(!validateAge()) valid = false;
+    if(!validateTenure()) valid = false;
+    if(!validateOrderValue()) valid = false;
+    if(!validateTotalOrders()) valid = false;
+    if(!validateLastPurchase()) valid = false;
+    if(!validateSupportTickets()) valid = false;
+    if(!validateGender()) valid = false;
+    if(!validateCity()) valid = false;
+    if(!validateSubscription()) valid = false;
+
+    return valid;
+
+}
+/* ===========================================
+        Live Validation
+=========================================== */
+
+document.getElementById("customer_id").addEventListener("input", validateCustomerID);
+
+document.getElementById("age").addEventListener("input", validateAge);
+
+document.getElementById("tenure_months").addEventListener("input", validateTenure);
+
+document.getElementById("avg_order_value").addEventListener("input", validateOrderValue);
+
+document.getElementById("total_orders").addEventListener("input", validateTotalOrders);
+
+document.getElementById("last_purchase_days_ago").addEventListener("input", validateLastPurchase);
+
+document.getElementById("support_tickets").addEventListener("input", validateSupportTickets);
+
+document.getElementById("gender").addEventListener("change", validateGender);
+
+document.getElementById("city").addEventListener("change", validateCity);
+
+document.getElementById("subscription_type").addEventListener("change", validateSubscription);
+
+</script>
+
+</body>
+</html>

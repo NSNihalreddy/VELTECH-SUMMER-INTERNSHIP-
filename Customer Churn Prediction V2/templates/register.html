@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <h1>Join the Platform</h1>
+        <h2>Create Your Account</h2>
+        
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+
+            <div class="flash-message {{ category }}">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<form method="POST" id="registerForm" novalidate>
+
+    <!-- Username -->
+
+    <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="Username"
+        autocomplete="username">
+
+    <small id="username_error" class="error"></small>
+
+    <!-- Email -->
+
+    <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Email Address"
+        autocomplete="email">
+
+    <small id="email_error" class="error"></small>
+
+    <!-- Password -->
+
+    <div class="password-box">
+
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            autocomplete="new-password">
+
+        <span
+            id="togglePassword"
+            class="toggle-password">
+            👁
+        </span>
+
+    </div>
+
+    <small id="password_error" class="error"></small>
+
+    <!-- Password Strength -->
+
+    <div class="strength-bar">
+
+        <div id="strengthFill"></div>
+
+    </div>
+
+    <small id="strengthText"></small>
+
+    <!-- Confirm Password -->
+
+    <div class="password-box">
+
+        <input
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            placeholder="Confirm Password"
+            autocomplete="new-password">
+
+        <span
+            id="toggleConfirmPassword"
+            class="toggle-password">
+            👁
+        </span>
+
+    </div>
+
+    <small id="confirm_password_error" class="error"></small>
+
+    <button
+        type="submit"
+        id="registerBtn">
+
+        Create Account
+
+    </button>
+
+</form>
+
+        <p>
+            Already have an account?
+            <a href="/">Login Here</a>
+        </p>
+
+    </div>
+
+</div>
+<script>
+
+// =========================================
+// Show / Hide Password
+// =========================================
+
+const togglePassword = document.getElementById("togglePassword");
+const password = document.getElementById("password");
+
+togglePassword.addEventListener("click",function(){
+
+    if(password.type==="password"){
+
+        password.type="text";
+        this.textContent="🙈";
+
+    }
+    else{
+
+        password.type="password";
+        this.textContent="👁";
+
+    }
+
+});
+
+// =========================================
+// Show / Hide Confirm Password
+// =========================================
+
+const toggleConfirmPassword=document.getElementById("toggleConfirmPassword");
+const confirmPassword=document.getElementById("confirm_password");
+
+toggleConfirmPassword.addEventListener("click",function(){
+
+    if(confirmPassword.type==="password"){
+
+        confirmPassword.type="text";
+        this.textContent="🙈";
+
+    }
+    else{
+
+        confirmPassword.type="password";
+        this.textContent="👁";
+
+    }
+
+});
+
+// =========================================
+// Helper Functions
+// =========================================
+
+function showError(id,message){
+
+    document.getElementById(id).classList.add("invalid");
+    document.getElementById(id+"_error").textContent=message;
+
+}
+
+function clearError(id){
+
+    document.getElementById(id).classList.remove("invalid");
+    document.getElementById(id+"_error").textContent="";
+
+}
+
+// =========================================
+// Username Validation
+// =========================================
+
+function validateUsername(){
+
+    const username=document.getElementById("username").value.trim();
+
+    if(username===""){
+
+        showError("username","Username is required.");
+        return false;
+
+    }
+
+    if(username.length<3){
+
+        showError("username","Username must contain at least 3 characters.");
+        return false;
+
+    }
+
+    clearError("username");
+    return true;
+
+}
+
+// =========================================
+// Email Validation
+// =========================================
+
+function validateEmail(){
+
+    const email=document.getElementById("email").value.trim();
+
+    const pattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(email===""){
+
+        showError("email","Email Address is required.");
+        return false;
+
+    }
+
+    if(!pattern.test(email)){
+
+        showError("email","Enter a valid Email Address.");
+        return false;
+
+    }
+
+    clearError("email");
+    return true;
+
+}
+
+// =========================================
+// Password Validation
+// =========================================
+
+function validatePassword(){
+
+    const pass=password.value;
+
+    if(pass===""){
+
+        showError("password","Password is required.");
+        updateStrength(0);
+        return false;
+
+    }
+
+    if(pass.length<8){
+
+        showError("password","Password must contain at least 8 characters.");
+        updateStrength(1);
+        return false;
+
+    }
+
+    clearError("password");
+
+    checkStrength(pass);
+
+    return true;
+
+}
+
+// =========================================
+// Confirm Password
+// =========================================
+
+function validateConfirmPassword(){
+
+    if(confirmPassword.value===""){
+
+        showError("confirm_password","Confirm your password.");
+        return false;
+
+    }
+
+    if(confirmPassword.value!==password.value){
+
+        showError("confirm_password","Passwords do not match.");
+        return false;
+
+    }
+
+    clearError("confirm_password");
+    return true;
+
+}
+// =========================================
+// Password Strength
+// =========================================
+
+function updateStrength(level){
+
+    const bar=document.getElementById("strengthFill");
+    const text=document.getElementById("strengthText");
+
+    if(level===0){
+
+        bar.style.width="0%";
+        bar.style.background="#ddd";
+        text.innerHTML="";
+
+    }
+
+    else if(level===1){
+
+        bar.style.width="25%";
+        bar.style.background="red";
+        text.innerHTML="Weak";
+
+    }
+
+    else if(level===2){
+
+        bar.style.width="50%";
+        bar.style.background="orange";
+        text.innerHTML="Fair";
+
+    }
+
+    else if(level===3){
+
+        bar.style.width="75%";
+        bar.style.background="#4caf50";
+        text.innerHTML="Good";
+
+    }
+
+    else{
+
+        bar.style.width="100%";
+        bar.style.background="green";
+        text.innerHTML="Strong";
+
+    }
+
+}
+
+function checkStrength(password){
+
+    let score=0;
+
+    if(password.length>=8) score++;
+
+    if(/[A-Z]/.test(password)) score++;
+
+    if(/[0-9]/.test(password)) score++;
+
+    if(/[!@#$%^&*(),.?":{}|<>]/.test(password)) score++;
+
+    updateStrength(score);
+
+}
+
+// =========================================
+// Live Validation
+// =========================================
+
+document.getElementById("username")
+.addEventListener("input",validateUsername);
+
+document.getElementById("email")
+.addEventListener("input",validateEmail);
+
+document.getElementById("password")
+.addEventListener("input",function(){
+
+    validatePassword();
+
+    if(confirmPassword.value!=="")
+        validateConfirmPassword();
+
+});
+
+document.getElementById("confirm_password")
+.addEventListener("input",validateConfirmPassword);
+
+// =========================================
+// Form Validation
+// =========================================
+
+document.getElementById("registerForm")
+.addEventListener("submit",function(e){
+
+    let valid=true;
+
+    if(!validateUsername()) valid=false;
+
+    if(!validateEmail()) valid=false;
+
+    if(!validatePassword()) valid=false;
+
+    if(!validateConfirmPassword()) valid=false;
+
+    if(!valid){
+
+        e.preventDefault();
+        return;
+
+    }
+
+    const btn=document.getElementById("registerBtn");
+
+    btn.disabled=true;
+
+    btn.classList.add("loading");
+
+    btn.innerHTML="Creating Account...";
+
+});
+</script>
+
+</body>
+</html>
+</body>
+</html>

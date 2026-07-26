@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Records</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="customers-page">
+<body>
+
+<nav>
+    
+    <a href="/home">Home</a>
+    <a href="/prediction">Prediction</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/customers">Customers</a>
+    <a href="/about">About</a>
+<a href="/logout" class="logout-btn">Logout</a>
+
+</nav>
+
+<div class="hero">
+
+    <h1>Customer Records</h1>
+<div class="table-container">
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Customer ID</th>
+            <th>Age</th>
+            <th>Tenure</th>
+            <th>Orders</th>
+            <th>City</th>
+            <th>Subscription</th>
+            <th>Prediction</th>
+            <th>Confidence</th>
+            <th>Risk Level</th>
+            <th>Action</th>
+        </tr>
+
+        {% for customer in customers %}
+        <tr>
+
+            <td>{{ loop.index }}</td>
+            <td>{{ customer['customer_id'] }}</td>
+            <td>{{ customer['age'] }}</td>
+            <td>{{ customer['tenure_months'] }}</td>
+            <td>{{ customer['total_orders'] }}</td>
+            <td>{{ customer['city'] }}</td>
+            <td>{{ customer['subscription_type'] }}</td>
+            <td>{{ customer['prediction'] }}</td>
+            <td>{{ customer['confidence'] }}%</td>
+            <td>
+    {% if customer['risk_level'] == 'High Risk' %}
+        <span class="risk-high">High Risk</span>
+
+    {% elif customer['risk_level'] == 'Medium Risk' %}
+        <span class="risk-medium">Medium Risk</span>
+
+    {% else %}
+        <span class="risk-low">Low Risk</span>
+    {% endif %}
+</td>
+
+            <td>
+                <form action="{{ url_for('delete_customer', id=customer.id) }}" method="POST" style="display:inline;">
+    <button type="submit">Delete</button>
+</form>
+                   
+                </a>
+            </td>
+
+        </tr>
+        {% endfor %}
+
+    </table>
+-</div>
+</div>
+
+<footer>
+    © 2026 Customer Churn Prediction System | Flask • SQLite • Machine Learning
+</footer>
+
+
+
+
+
+</body>
+</html>
